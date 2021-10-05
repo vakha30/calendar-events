@@ -1,0 +1,63 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 50px 0;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu li {
+  margin-left: 40px;
+}
+
+.menu a {
+  color: #c0c0c0;
+  font-size: 14px;
+  padding-left: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid transparent;
+  position: relative;
+}
+
+.menu a svg {
+  fill: #c0c0c0;
+  position: absolute;
+  left: 0;
+  top: 2px;
+}
+
+.menu a.active {
+  color: #1890ff;
+  border-color: #1890ff;
+}
+
+.menu a.active svg {
+  fill: #1890ff;
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    justify-content: center;
+  }
+  .menu li {
+    margin-left: 0;
+    margin: 0 20px;
+  }
+}
+
+@media screen and (max-width: 290px) {
+  .header {
+    padding: 20px 0;
+  }
+  .menu {
+    display: block;
+  }
+  .menu li {
+    margin-bottom: 20px;
+  }
+  .menu a {
+    padding-bottom: 3px;
+  }
+}
