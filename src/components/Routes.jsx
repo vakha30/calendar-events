@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-
 import { EventCardsPage, CalendarPage, SingleEventPage } from "./pages";
 
 function Rotes() {
