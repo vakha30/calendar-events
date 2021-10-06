@@ -33,18 +33,18 @@ function SeletDate() {
         <option value="2022">2022</option>
       </select>
       <select name="select-month" onChange={handleChange} value={month}>
-        <option value="1">ЯНВ</option>
-        <option value="2">ФЕВ</option>
-        <option value="3">МАР</option>
-        <option value="4">АПР</option>
-        <option value="5">МАЙ</option>
-        <option value="6">ИЮН</option>
-        <option value="7">ИЮЛ</option>
-        <option value="8">АВГ</option>
-        <option value="9">СЕН</option>
-        <option value="10">ОКТ</option>
-        <option value="11">НОЯ</option>
-        <option value="12">ДЕК</option>
+        <option value="0">ЯНВ</option>
+        <option value="1">ФЕВ</option>
+        <option value="2">МАР</option>
+        <option value="3">АПР</option>
+        <option value="4">МАЙ</option>
+        <option value="5">ИЮН</option>
+        <option value="6">ИЮЛ</option>
+        <option value="7">АВГ</option>
+        <option value="8">СЕН</option>
+        <option value="9">ОКТ</option>
+        <option value="10">НОЯ</option>
+        <option value="11">ДЕК</option>
       </select>
     </div>
   );

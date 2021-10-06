@@ -1,0 +1,83 @@
+.eventPage {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 50px;
+}
+
+.eventPageImg {
+  width: 45%;
+}
+
+.eventPageImg img {
+  width: 100%;
+}
+
+.eventPageInfo {
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0 34px;
+}
+
+.infoTop h2 {
+  font-size: 24px;
+}
+
+.infoTop span {
+  display: inline-block;
+  background: #f9f0ff;
+  color: #722ed1;
+  font-size: 12px;
+  padding: 1px 8px;
+  border: 1px solid #d3adf7;
+  border-radius: 2px;
+}
+
+.infoText {
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+
+.infoBtn {
+  margin-top: auto;
+  text-align: right;
+}
+
+.subscribers {
+  padding: 60px 0;
+}
+
+.subscribers h4 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.subscribers li {
+  font-size: 14px;
+}
+
+@media screen and (max-width: 550px) {
+  .eventPage {
+    display: block;
+    padding-top: 15px;
+  }
+  .eventPageImg {
+    width: 100%;
+  }
+
+  .eventPageInfo {
+    width: 100%;
+  }
+
+  .infoTop h2 {
+    font-size: 20px;
+  }
+}

@@ -4,16 +4,11 @@ import cl from "./events.module.css";
 import { Link } from "react-router-dom";
 
 const Event = React.memo(function ({ id, title, image, date }) {
-  const [dateObj, setDateObj] = useState({});
+  const [formatDate, setFormatDate] = useState("");
+
   useEffect(() => {
     const newDate = new Date(date);
-    const obj = {
-      day: newDate.getDay(),
-      month: newDate.getMonth(),
-      year: newDate.getFullYear(),
-      day2: newDate.getUTCDay(),
-    };
-    setDateObj(obj);
+    setFormatDate(newDate.toLocaleDateString());
   }, [date]);
 
   return (
@@ -25,7 +20,7 @@ const Event = React.memo(function ({ id, title, image, date }) {
       <div className={cl.eventImg}>
         <img src={image} alt={title} />
       </div>
-      <div className={cl.eventDate}>{`${dateObj.day2}.${dateObj.month}.${dateObj.year}.`}</div>
+      <div className={cl.eventDate}>{formatDate}</div>
     </div>
   );
 });
