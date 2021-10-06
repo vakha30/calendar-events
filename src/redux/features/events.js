@@ -49,3 +49,10 @@ export const fethAllEvents = () => async (dispatch) => {
 // селекторы, используемые в useSelector
 export const selectEventsLoading = (state) => state.events.loading;
 export const selectAllEvents = (state) => state.events.items;
+
+export const selectEventsByDate = (date) => (state) => {
+  return state.events.items.filter((item) => {
+    const newDate = new Date(item.date);
+    return newDate.getMonth() === date.month && newDate.getFullYear() === date.year;
+  });
+};

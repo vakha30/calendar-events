@@ -1,7 +1,7 @@
 const initialState = {
   selectedDate: {
-    year: 2020,
-    month: 1,
+    year: 2021,
+    month: 10,
   },
 };
 
@@ -21,7 +21,6 @@ const date = (state = initialState, action) => {
 export default date;
 
 export const setDate = (date) => (dispatch) => {
-  console.log(date);
   dispatch({ type: "date/select", payload: date });
 };
 
