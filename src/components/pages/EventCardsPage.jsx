@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { fethAllEvents, selectEventsLoading } from "../../redux/features/events";
 import Events from "../Events";
 import SelectDate from "../SelectDate";
+import Loading from "../Events/Loading";
 function EventCardsPage() {
   const dispatch = useDispatch();
   const loading = useSelector(selectEventsLoading);
@@ -17,7 +18,7 @@ function EventCardsPage() {
       </Helmet>
       <div className="container">
         <SelectDate />
-        {loading ? "Загрузка..." : <Events />}
+        {loading ? <Loading /> : <Events />}
       </div>
     </>
   );

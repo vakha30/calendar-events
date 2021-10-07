@@ -25,6 +25,7 @@
 }
 
 .subscriptionInfo {
+  flex: 1;
 }
 
 .subscriptionInfo h3 {
@@ -52,7 +53,7 @@
   position: relative;
 }
 
-button:first-child::after {
+.subscriptionLinks button:first-child::after {
   content: "";
   display: block;
   height: 14px;
@@ -78,7 +79,7 @@ button:first-child::after {
   position: relative;
 }
 
-.removePopup h3 svg {
+.removePopup h3 img {
   position: absolute;
   top: -3px;
   left: -3px;
@@ -91,4 +92,32 @@ button:first-child::after {
 
 button {
   margin-left: 10px;
+}
+
+.removeMobileBtn {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+.loadMore {
+  text-align: center;
+  padding-top: 30px;
+}
+
+@media screen and (max-width: 550px) {
+  .subscriptions {
+    padding: 0 10px;
+  }
+  .subscription {
+    padding-right: 15px;
+  }
+  .subscriptionLinks button:first-child::after {
+    display: none;
+  }
 }

@@ -1,12 +1,16 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useMediaQuery } from "react-responsive";
+import removeIcon from "../../assets/img/remove.svg";
 import cl from "./subscriptions.module.css";
 
-function Subscription({ id, title, image, description, onRemoveClick }) {
+const Subscription = React.memo(function ({ id, title, image, description, onRemoveClick }) {
   const history = useHistory();
+  const isMobile = useMediaQuery({ query: "(max-width: 550px)" });
+
   return (
-    <div className={cl.subscription}>
+    <div className={cl.subscription} onClick={() => isMobile && history.push(`/event/${id}`)}>
       <div className={cl.subscriptionImg}>
         <img src={image} alt={title} />
       </div>
@@ -15,12 +19,26 @@ function Subscription({ id, title, image, description, onRemoveClick }) {
         <p>{description.split(" ").slice(0, 5).join(" ") + "..."}</p>
       </div>
       <div className={cl.subscriptionLinks}>
-        <button onClick={() => onRemoveClick(id)}>удалить</button>
-        <button onClick={() => history.push(`/event/${id}`)}>перейти на страницу</button>
+        {isMobile ? (
+          <button
+            className={cl.removeMobileBtn}
+            onClick={(e) => {
+              e.stopPropagation();
+              onRemoveClick(id);
+            }}
+          >
+            <img src={removeIcon} alt="" />
+          </button>
+        ) : (
+          <>
+            <button onClick={() => onRemoveClick(id)}>удалить</button>
+            <button onClick={() => history.push(`/event/${id}`)}>перейти на страницу</button>
+          </>
+        )}
       </div>
     </div>
   );
-}
+});
 
 Subscription.propTypes = {
   id: PropTypes.number.isRequired,

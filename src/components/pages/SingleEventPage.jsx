@@ -21,10 +21,6 @@ function SingleEventPage() {
     dispatch(fetchEventById(id));
   }, [dispatch, id]);
 
-  if (!event) {
-    return <h1>Loading...</h1>;
-  }
-
   const subscribe = (data) => {
     dispatch(
       setSubscriptions({
@@ -35,6 +31,10 @@ function SingleEventPage() {
 
     setModalVisible(false);
   };
+
+  if (!event) {
+    return <h1 className="loading">Loading...</h1>;
+  }
 
   return (
     <>

@@ -44,3 +44,11 @@ button {
   outline: none;
   transition: 0.3s;
 }
+
+.loading {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
