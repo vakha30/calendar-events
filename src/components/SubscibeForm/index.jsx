@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Input from "../UI/Input";
 import cl from "./subscibeForm.module.css";
 import Button from "../UI/Button";
 
-function SubscribeForm({ setModalVisible, title, description, image }) {
+function SubscribeForm({ setModalVisible, subscribe, title, description, image }) {
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+
+  const handleChange = (e) => {
+    if (e.target.name === "name") {
+      setName(e.target.value);
+    }
+    if (e.target.name === "lastname") {
+      setLastname(e.target.value);
+    }
+  };
+
+  const handleClick = () => {
+    subscribe({ name, lastname });
+  };
+
   return (
     <div className={cl.subscribeForm}>
       <div className={cl.header}>
@@ -21,12 +37,14 @@ function SubscribeForm({ setModalVisible, title, description, image }) {
         </div>
       </div>
       <div className={cl.formInputs}>
-        <Input placeholder="Имя" />
-        <Input placeholder="Фамилия" />
+        <Input placeholder="Имя" name="name" onChange={handleChange} />
+        <Input placeholder="Фамилия" name="lastname" onChange={handleChange} />
       </div>
       <div className={cl.footer}>
-        <Button>Отмена</Button>
-        <Button primary>ОК</Button>
+        <Button onClick={() => setModalVisible(false)}>Отмена</Button>
+        <Button primary onClick={handleClick}>
+          ОК
+        </Button>
       </div>
     </div>
   );
@@ -37,6 +55,7 @@ SubscribeForm.propTypes = {
   image: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   setModalVisible: PropTypes.func.isRequired,
+  subscribe: PropTypes.func.isRequired,
 };
 
 export default SubscribeForm;

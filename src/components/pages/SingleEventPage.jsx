@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchEventById, selectEventById } from "../../redux/features/events";
 import { Helmet } from "react-helmet";
 import Modal from "../UI/Modal";
-
+import { setSubscriptions } from "../../redux/features/subsriptions";
 import cl from "./pages.module.css";
 import Button from "../UI/Button";
 import SubscribeForm from "../SubscibeForm";
@@ -24,6 +24,17 @@ function SingleEventPage() {
   if (!event) {
     return <h1>Loading...</h1>;
   }
+
+  const subscribe = (data) => {
+    dispatch(
+      setSubscriptions({
+        ...event,
+        subscribers: [data],
+      })
+    );
+
+    setModalVisible(false);
+  };
 
   return (
     <>
@@ -62,6 +73,7 @@ function SingleEventPage() {
             title={event.title}
             description={event.description}
             image={event.image}
+            subscribe={subscribe}
           />
         </Modal>
       )}

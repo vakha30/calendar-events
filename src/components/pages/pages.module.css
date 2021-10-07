@@ -81,3 +81,9 @@
     font-size: 20px;
   }
 }
+
+.subscriptions {
+  background-color: red;
+  max-width: 820px;
+  margin: 0 auto;
+}

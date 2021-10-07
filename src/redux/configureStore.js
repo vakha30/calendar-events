@@ -3,7 +3,9 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import events from "./features/events";
 import date from "./features/date";
-const rootReduces = combineReducers({ events, date });
+import subscriptions from "./features/subsriptions";
+
+const rootReduces = combineReducers({ events, date, subscriptions });
 
 const store = createStore(rootReduces, composeWithDevTools(applyMiddleware(thunk)));
 

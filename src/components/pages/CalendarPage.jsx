@@ -1,7 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import SeletDate from "../SelectDate";
 
+import SelectDate from "../SelectDate";
+import Subscriptions from "../Subscriptions";
 function CalendarPage() {
   return (
     <>
@@ -10,8 +11,8 @@ function CalendarPage() {
       </Helmet>
 
       <div className="container">
-        <SeletDate />
-        Страница с календарем
+        <SelectDate />
+        <Subscriptions />
       </div>
     </>
   );
