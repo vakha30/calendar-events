@@ -32,4 +32,10 @@ export const setSubscriptions = (data) => (dispatch, getState) => {
   dispatch({ type: "subscriptions/set", payload: data });
 };
 
+export const removeSubscription = (id) => (dispatch, getState) => {
+  const { subscriptions } = getState();
+  const newItems = subscriptions.items.filter((item) => item.id !== id);
+  console.log(newItems);
+};
+
 export const selectSubscriptions = (state) => state.subscriptions.items;

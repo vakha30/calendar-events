@@ -17,8 +17,8 @@ button:hover {
 
 .primary {
   background-color: #1890ff;
+  border: 1px solid #1890ff;
   color: antiquewhite;
-  border: none;
   position: relative;
 }
 

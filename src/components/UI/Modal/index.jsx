@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import cl from "./modal.module.css";
 
 const Modal = ({ children, setVisible }) => {
@@ -10,6 +10,10 @@ const Modal = ({ children, setVisible }) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  setVisible: PropTypes.func.isRequired,
 };
 
 export default Modal;
