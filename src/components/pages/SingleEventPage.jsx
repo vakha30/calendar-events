@@ -1,15 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchEventById, selectEventById } from "../../redux/features/events";
 import { Helmet } from "react-helmet";
+import Modal from "../UI/Modal";
 
 import cl from "./pages.module.css";
-import Button from "../Button.jsx";
+import Button from "../UI/Button";
+import SubscribeForm from "../SubscibeForm";
 
 function SingleEventPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const event = useSelector(selectEventById(id));
   const formatDate = event ? new Date(event.date) : "";
@@ -39,7 +42,9 @@ function SingleEventPage() {
             </div>
             <p className={cl.infoText}>{event.description}</p>
             <div className={cl.infoBtn}>
-              <Button primary>Записаться</Button>
+              <Button primary arrow onClick={() => setModalVisible(true)}>
+                Записаться
+              </Button>
             </div>
           </div>
         </div>
@@ -50,6 +55,16 @@ function SingleEventPage() {
           </ul>
         </div>
       </div>
+      {modalVisible && (
+        <Modal setVisible={setModalVisible}>
+          <SubscribeForm
+            setModalVisible={setModalVisible}
+            title={event.title}
+            description={event.description}
+            image={event.image}
+          />
+        </Modal>
+      )}
     </>
   );
 }
