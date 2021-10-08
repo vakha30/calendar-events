@@ -4,22 +4,31 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchEventById, selectEventById } from "../../redux/features/events";
 import { Helmet } from "react-helmet";
 import Modal from "../UI/Modal";
-import { setSubscriptions } from "../../redux/features/subsriptions";
+import {
+  removeSubscription,
+  selectSubscriptions,
+  setSubscriptions,
+} from "../../redux/features/subsriptions";
 import cl from "./pages.module.css";
 import Button from "../UI/Button";
 import SubscribeForm from "../SubscibeForm";
+import warningIcon from "../../assets/img/warning.svg";
 
 function SingleEventPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [modalVisible, setModalVisible] = useState(false);
+  const [subscribeModal, setSubscribeModal] = useState(false);
+  const [unsubscribeModal, setUnsubscribeModal] = useState(false);
 
+  const subscriptions = useSelector(selectSubscriptions);
   const event = useSelector(selectEventById(id));
   const formatDate = event ? new Date(event.date) : "";
 
+  let subscribeEvent = subscriptions.find((item) => item.id === +id);
+
   useEffect(() => {
     dispatch(fetchEventById(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, subscribeEvent]);
 
   const subscribe = (data) => {
     dispatch(
@@ -29,11 +38,16 @@ function SingleEventPage() {
       })
     );
 
-    setModalVisible(false);
+    setSubscribeModal(false);
+  };
+
+  const onRemoveSubscription = () => {
+    dispatch(removeSubscription(+id));
+    setUnsubscribeModal(false);
   };
 
   if (!event) {
-    return <h1 className="loading">Loading...</h1>;
+    return <h1 className="content-center">Loading...</h1>;
   }
 
   return (
@@ -53,28 +67,56 @@ function SingleEventPage() {
             </div>
             <p className={cl.infoText}>{event.description}</p>
             <div className={cl.infoBtn}>
-              <Button primary arrow onClick={() => setModalVisible(true)}>
-                Записаться
-              </Button>
+              {!subscribeEvent ? (
+                <Button primary arrow onClick={() => setSubscribeModal(true)}>
+                  Записаться
+                </Button>
+              ) : (
+                <Button danger onClick={() => setUnsubscribeModal(true)}>
+                  Отказаться
+                </Button>
+              )}
             </div>
           </div>
         </div>
         <div className={cl.subscribers}>
           <h4>Посетители</h4>
           <ul>
-            <li>пока никто не записан</li>
+            {subscribeEvent ? (
+              subscribeEvent.subscribers.map((item, index) => (
+                <li key={index}>{`${item.name} ${item.lastname}`}</li>
+              ))
+            ) : (
+              <li>пока никто не записан</li>
+            )}
           </ul>
         </div>
       </div>
-      {modalVisible && (
-        <Modal setVisible={setModalVisible}>
+      {subscribeModal && (
+        <Modal setVisible={setSubscribeModal}>
           <SubscribeForm
-            setModalVisible={setModalVisible}
+            setModalVisible={setSubscribeModal}
             title={event.title}
             description={event.description}
             image={event.image}
             subscribe={subscribe}
           />
+        </Modal>
+      )}
+      {unsubscribeModal && (
+        <Modal setVisible={setUnsubscribeModal}>
+          <div className={cl.removePopup}>
+            <h3>
+              <img src={warningIcon} alt="" />
+              Вы уверены, что хотите отказаться?
+            </h3>
+            <div className={cl.buttons}>
+              <Button onClick={() => setUnsubscribeModal(false)}>Нет</Button>
+              <Button primary onClick={onRemoveSubscription}>
+                Да
+              </Button>
+            </div>
+          </div>
         </Modal>
       )}
     </>

@@ -46,7 +46,10 @@ export const setSubscriptions = (data) => (dispatch, getState) => {
 export const removeSubscription = (id) => (dispatch, getState) => {
   const { subscriptions } = getState();
   const newItems = subscriptions.items.filter((item) => item.id !== id);
+
   localStorage.setItem("subscriptions", JSON.stringify(newItems));
+
+  dispatch(fetchSubscriptions());
 };
 
 export const selectSubscriptions = (state) => state.subscriptions.items;

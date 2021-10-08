@@ -11,7 +11,7 @@ function Events() {
   const events = useSelector(selectEventsByDate(date));
 
   if (events.length === 0) {
-    return <h1>Пусто</h1>;
+    return <h1 className="content-center">Пусто</h1>;
   }
 
   return (

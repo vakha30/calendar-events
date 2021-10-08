@@ -113,6 +113,7 @@ button {
 @media screen and (max-width: 550px) {
   .subscriptions {
     padding: 0 10px;
+    padding-top: 30px;
   }
   .subscription {
     padding-right: 15px;

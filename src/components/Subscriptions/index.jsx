@@ -1,11 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Subscription from "./Subscription";
-import {
-  fetchSubscriptions,
-  removeSubscription,
-  selectSubscriptionsByFilter,
-} from "../../redux/features/subsriptions";
+import { removeSubscription, selectSubscriptionsByFilter } from "../../redux/features/subsriptions";
 import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 import { selectDate } from "../../redux/features/date";
@@ -21,10 +17,6 @@ function Subscriptions() {
   const date = useSelector(selectDate);
   const subscriptions = useSelector(selectSubscriptionsByFilter(date, paginationCount));
 
-  useEffect(() => {
-    dispatch(fetchSubscriptions());
-  }, [dispatch, currentId]);
-
   const onRemoveClick = useCallback((id) => {
     setVisibleModal(true);
     setCurrentId(id);
@@ -39,6 +31,10 @@ function Subscriptions() {
   const handleLoadMoreClick = () => {
     setPaginationCount(paginationCount + 1);
   };
+
+  if (subscriptions.length === 0) {
+    return <h1 className="content-center">Пусто</h1>;
+  }
 
   return (
     <div className={cl.subscriptions}>
